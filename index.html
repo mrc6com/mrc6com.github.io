@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;url=https://www.example.com">
+    <title>跳转中...</title>
+    <script>
+        // 从本地存储获取网址列表和当前索引
+        let redirectUrls = JSON.parse(localStorage.getItem('redirectUrls')) || [
+            'https://www.baidu.com',
+            'https://www.google.com',
+            'https://github.com'
+        ];
+        
+        let currentIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
+        
+        // 如果没有网址，显示管理界面
+        if (redirectUrls.length === 0) {
+            document.write(`
+                <style>
+                    body { font-family: Arial; text-align: center; padding: 50px; }
+                    input { padding: 8px; width: 300px; }
+                    button { padding: 8px 15px; background: #4CAF50; color: white; border: none; }
+                </style>
+                <h2>请添加跳转网址</h2>
+                <input type="text" id="newUrl" placeholder="https://example.com">
+                <button onclick="addUrl()">添加</button>
+                <script>
+                    function addUrl() {
+                        const url = document.getElementById('newUrl').value.trim();
+                        if (url) {
+                            const urls = [url];
+                            localStorage.setItem('redirectUrls', JSON.stringify(urls));
+                            localStorage.setItem('currentIndex', '0');
+                            location.reload();
+                        }
+                    }
+                <\/script>
+            `);
+        } else {
+            // 跳转到当前网址
+            const redirectUrl = redirectUrls[currentIndex];
+            
+            // 更新索引
+            currentIndex = (currentIndex + 1) % redirectUrls.length;
+            localStorage.setItem('currentIndex', currentIndex.toString());
+            
+            // 立即跳转
+            window.location.href = redirectUrl;
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <h1>请启用JavaScript以使用跳转功能</h1>
+    </noscript>
+</body>
+</html>
