@@ -1,61 +1,209 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=https://www.example.com">
-    <title>跳转中...</title>
-    <script>
-        // 从本地存储获取网址列表和当前索引
-        let redirectUrls = JSON.parse(localStorage.getItem('redirectUrls')) || [
-            'https://t.me/kxin69',
-            'https://t.me/MRC5Anjali',
-            'https://t.me/MRC4Anjali',
-            'https://t.me/MRC3Anjali',
-            'https://t.me/MRC2Anjali',
-            'https://t.me/MRC1Anjali',
-        ];
-        
-        let currentIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
-        
-        // 如果没有网址，显示管理界面
-        if (redirectUrls.length === 0) {
-            document.write(`
-                <style>
-                    body { font-family: Arial; text-align: center; padding: 50px; }
-                    input { padding: 8px; width: 300px; }
-                    button { padding: 8px 15px; background: #4CAF50; color: white; border: none; }
-                </style>
-                <h2>请添加跳转网址</h2>
-                <input type="text" id="newUrl" placeholder="https://example.com">
-                <button onclick="addUrl()">添加</button>
-                <script>
-                    function addUrl() {
-                        const url = document.getElementById('newUrl').value.trim();
-                        if (url) {
-                            const urls = [url];
-                            localStorage.setItem('redirectUrls', JSON.stringify(urls));
-                            localStorage.setItem('currentIndex', '0');
-                            location.reload();
-                        }
-                    }
-                <\/script>
-            `);
-        } else {
-            // 跳转到当前网址
-            const redirectUrl = redirectUrls[currentIndex];
-            
-            // 更新索引
-            currentIndex = (currentIndex + 1) % redirectUrls.length;
-            localStorage.setItem('currentIndex', currentIndex.toString());
-            
-            // 立即跳转
-            window.location.href = redirectUrl;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRC Exchange - Cryptocurrency Wealth Platform</title>
+    <style>
+        :root {
+            --primary-color: #2A5CAA;
+            --secondary-color: #6CB4EE;
+            --accent-color: #FF6B6B;
+            --bg-color: #F0F8FF;
+            --font-main: 'Segoe UI', Arial, sans-serif;
+            --font-heading: 'Roboto', 'Helvetica Neue', sans-serif;
         }
-    </script>
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(42,92,170,0.2);
+        }
+        
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            letter-spacing: 1.5px;
+        }
+        
+        .tagline {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(42,92,170,0.08);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .testimonials {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            box-shadow: 0 6px 20px rgba(42,92,170,0.08);
+        }
+        
+        .testimonial {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8faff;
+            border-radius: 10px;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        ol {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .feature-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <noscript>
-        <h1>请启用JavaScript以使用跳转功能</h1>
-    </noscript>
+    <header>
+        <div class="container">
+            <h1>MRC Exchange</h1>
+            <p class="tagline">Your Gateway to Crypto Wealth</p>
+            <a href="https://mrcexchange.com/#/pages/reg/index?invite_code=354672" class="cta-button">Join Now - Limited Offer!</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section>
+            <h2>Platform Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Daily Stable Returns</h3>
+                    <p>4%-10% daily returns with professional trading signals</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Team Rewards</h3>
+                    <p>3-tier referral system with up to ₹200,000 daily earnings</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Bank-level Security</h3>
+                    <p>Funds secured by Indian National Bank with 48h refund guarantee</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <h2>Success Stories</h2>
+            <div class="testimonial">
+                <p>"Earned ₹50,000 in first two weeks! The signals are amazingly accurate."</p>
+                <p><strong>- Raj, Mumbai</strong></p>
+            </div>
+            <div class="testimonial">
+                <p>"My daily income as broker exceeds monthly salary from regular jobs!"</p>
+                <p><strong>- Priya, New Delhi</strong></p>
+            </div>
+        </section>
+        
+        <section id="register">
+            <h2>Get Started</h2>
+            <ol>
+                <li>Register with mobile number</li>
+                <li>Deposit ₹500 to activate account</li>
+                <li>Follow 8PM trading signals</li>
+                <li>Withdraw when profit reaches ₹300</li>
+                <li>Earn more through referrals</li>
+            </ol>
+            <div style="text-align: center; margin: 40px 0;">
+                <a href="https://mrcexchange.com/#/pages/reg/index?invite_code=354672" class="cta-button">Register Now</a>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 MRC Exchange. All rights reserved.</p>
+            <p><small>Cryptocurrency trading involves risks. Past performance doesn't guarantee future results.</small></p>
+        </div>
+    </footer>
 </body>
 </html>
