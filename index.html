@@ -1,74 +1,117 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=https://www.example.com">
-    <title>...</title>
-    <script>
-        // 
-        let redirectUrls = JSON.parse(localStorage.getItem('redirectUrls')) || [
-            'https://wa.me/919840634484',
-            'https://wa.me/918692954188',
-            'https://wa.me/919353165389',
-            'https://wa.me/917099566923',
-            'https://wa.me/917501961951',
-            'https://wa.me/918529085254',
-            'https://wa.me/14066087420',
-            'https://wa.me/918639672573',
-            'https://wa.me/918098270771',
-            'https://wa.me/919381848388',
-            'https://wa.me/918521424494',
-            'https://wa.me/918617503539',
-            'https://wa.me/919370135284',
-            'https://wa.me/917386550445',
-            'https://wa.me/918511660353',
-            'https://wa.me/918722920953',
-            'https://wa.me/917373437003',
-            'https://wa.me/919707868768',
-            'https://wa.me/12624430916'
-        ];
-        
-        let currentIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
-        
-        // 
-        if (redirectUrls.length === 0) {
-            document.write(`
-                <style>
-                    body { font-family: Arial; text-align: center; padding: 50px; }
-                    input { padding: 8px; width: 300px; }
-                    button { padding: 8px 15px; background: #4CAF50; color: white; border: none; }
-                </style>
-                <h2></h2>
-                <input type="text" id="newUrl" placeholder="https://example.com">
-                <button onclick="addUrl()"></button>
-                <script>
-                    function addUrl() {
-                        const url = document.getElementById('newUrl').value.trim();
-                        if (url) {
-                            const urls = [url];
-                            localStorage.setItem('redirectUrls', JSON.stringify(urls));
-                            localStorage.setItem('currentIndex', '0');
-                            location.reload();
-                        }
-                    }
-                <\/script>
-            `);
-        } else {
-            // 
-            const redirectUrl = redirectUrls[currentIndex];
-            
-            // 
-            currentIndex = (currentIndex + 1) % redirectUrls.length;
-            localStorage.setItem('currentIndex', currentIndex.toString());
-            
-            // 
-            window.location.href = redirectUrl;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRC Online Work</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
-    </script>
+
+        body {
+            background: #f8f9fa;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        p {
+            color: #34495e;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .salary {
+            color: #27ae60;
+            font-size: 24px;
+            text-align: center;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .apply-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .apply-button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .apply-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            border-top: 2px solid #ecf0f1;
+            margin: 25px 0;
+        }
+    </style>
 </head>
 <body>
-    <noscript>
-        <h1>JavaScript</h1>
-    </noscript>
+    <div class="container">
+        <div class="header">
+            <h1>MRC are hiring online assistants!</h1>
+        </div>
+
+        <div class="content">
+            <div class="highlight">
+                <p>Work. Earn. Fast.</p>
+                <p>Online Part-time Job</p>
+            </div>
+
+            <p>MRC online business projects are strictly controlled by various professional departments of the company to ensure project security and reliability. You only need to have at least 25 years. With just a mobile phone and mobile payment, you can master online money-making skills in 10 minutes.</p>
+
+            <p>Join MRC online recruitment program today! MRC offer better and safer jobs. Welcome to join MRC to work and earn money from home.</p>
+
+            <div class="divider"></div>
+
+            <div class="salary">Earn Rs 5000 - 12000/day!</div>
+
+            <div class="apply-section">
+                <a href="https://link.xinghe.me/9ejik4xs" class="apply-button" target="_blank">APPLY FOR THE JOB NOW</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
