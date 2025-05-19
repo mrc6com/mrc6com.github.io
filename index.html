@@ -1,57 +1,38 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=https://www.example.com">
-    <title>wait...</title>
-    <script>
-        // 
-        let redirectUrls = JSON.parse(localStorage.getItem('redirectUrls')) || [
-            'https://link.xinghe.me/9ejik4xs',
-            'https://link.xinghe.me/9ejik4xs'
-        ];
-        
-        let currentIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
-        
-        // 
-        if (redirectUrls.length === 0) {
-            document.write(`
-                <style>
-                    body { font-family: Arial; text-align: center; padding: 50px; }
-                    input { padding: 8px; width: 300px; }
-                    button { padding: 8px 15px; background: #4CAF50; color: white; border: none; }
-                </style>
-                <h2>ok</h2>
-                <input type="text" id="newUrl" placeholder="https://example.com">
-                <button onclick="addUrl()">add</button>
-                <script>
-                    function addUrl() {
-                        const url = document.getElementById('newUrl').value.trim();
-                        if (url) {
-                            const urls = [url];
-                            localStorage.setItem('redirectUrls', JSON.stringify(urls));
-                            localStorage.setItem('currentIndex', '0');
-                            location.reload();
-                        }
-                    }
-                <\/script>
-            `);
-        } else {
+<script>
+(function(){
+    // 
+    const LINKS = [
+        'https://t.me/WsyLc',
+		'https://t.me/kxin69',
+		'https://t.me/MRC56789',
+        'https://t.me/HGUIHIUH555'
+    ];
+
+    // 
+    const getFingerprint = () => {
+        let uid = localStorage.getItem('userID');
+        if (!uid) {
             // 
-            const redirectUrl = redirectUrls[currentIndex];
-            
-            // 
-            currentIndex = (currentIndex + 1) % redirectUrls.length;
-            localStorage.setItem('currentIndex', currentIndex.toString());
-            
-            // 
-            window.location.href = redirectUrl;
+            uid = `${Date.now()}${Math.random().toString(36).slice(2)}${screen.width}x${screen.height}`;
+            localStorage.setItem('userID', btoa(uid).slice(0,32));
         }
-    </script>
-</head>
-<body>
-    <noscript>
-        <h1>JavaScript</h1>
-    </noscript>
-</body>
-</html>
+        return uid;
+    };
+
+    // 
+    const hashToIndex = (str, max) => {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = (hash << 5) - hash + str.charCodeAt(i);
+            hash |= 0; // 
+        }
+        return Math.abs(hash) % max;
+    };
+
+    // 
+    const fingerprint = getFingerprint();
+    const targetIndex = hashToIndex(fingerprint, LINKS.length);
+    location.href = LINKS[targetIndex];
+})();
+</script>
